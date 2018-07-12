@@ -17,12 +17,14 @@
 
     <modules>
         <module>using-spring-boot</module>
+        <module>using-spring-boot-geode-starter</module>
     </modules>
 
     <properties>
-        <apache-geode.version>1.6.0</apache-geode.version>
+        <apache-geode.version>1.2.1</apache-geode.version>
         <spring-data-geode.version>2.1.0.M3</spring-data-geode.version>
         <spring-boot.version>2.0.3.BUILD-SNAPSHOT</spring-boot.version>
+        <spring-shell.version>1.2.0.RELEASE</spring-shell.version>
     </properties>
 
     <repositories>

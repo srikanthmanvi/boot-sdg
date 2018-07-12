@@ -1,4 +1,4 @@
-package io.pivotal.support;
+package io.pivotal.support.sdg.starter.client;
 
 import org.apache.geode.cache.GemFireCache;
 import org.apache.geode.cache.Region;
@@ -11,30 +11,26 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.data.gemfire.config.annotation.ClientCacheApplication;
 
-@ClientCacheApplication()
-
-public class SimpleClientCache {
+@ClientCacheApplication
+public class Client {
 
 	public static void main(String args[]) {
-
-		SpringApplication.run(SimpleClientCache.class, args);
-	}
-
-	@Bean ApplicationRunner applicationRunner(@Qualifier("customerRegion") Region customerRegion) {
-		return args -> {
-			customerRegion.put(2, "AA");
-			System.out.println("Done With Put");
-		};
+		SpringApplication.run(Client.class, args);
 	}
 
 	@Bean
-	@Qualifier("customerRegion")
-	Region customerRegion(GemFireCache cache) {
-
+	@Qualifier("customerRegion") Region customerRegion(GemFireCache cache) {
 		ClientCache clientCache = (ClientCache) cache;
 		ClientRegionFactory<Object, Object> clientRegionFactory = clientCache
 				.createClientRegionFactory(ClientRegionShortcut.PROXY);
 		return clientRegionFactory.create("Customer");
 	}
 
+	@Bean
+	ApplicationRunner applicationRunner(@Qualifier("customerRegion") Region customerRegion) {
+		return args -> {
+			customerRegion.put(2, "AA");
+			System.out.println("Done With Put");
+		};
+	}
 }
